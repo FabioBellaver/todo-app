@@ -36,6 +36,10 @@
   transition: background-color .2s;
 }
 
+.container svg {
+  margin-left: 0.5rem;
+}
+
 .container button:hover {
   background: var(--blue-dark);
 }
