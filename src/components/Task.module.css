@@ -1,5 +1,5 @@
 .container {
-  margin-top: 8.125rem;
+  margin-top: 5.75rem;
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -12,6 +12,7 @@
   width: 100vw;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 1.5rem;
 }
 
 .container .data .created {
@@ -25,7 +26,7 @@
   font-size: 0.75rem;
   color: var(--gray-200);
   background: var(--gray-400);
-  padding: 0 0.8rem;
+  padding: .1rem 0.8rem;
   border-radius: 8px;
 }
 
@@ -40,16 +41,24 @@
   font-size: 0.75rem;
   color: var(--gray-200);
   background: var(--gray-400);
-  padding: 0 0.8rem;
+  padding: .1rem 0.8rem;
   border-radius: 8px;
 }
 
-.container .notHaveTasks {
+.container .Tasks {
+  border-top: 1px solid var(--gray-400);
+  border-radius: 8px;
+  width: 46rem;
+  height: 15.25rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-300);
 }
 
-.contaienr .notHaveTasks img {
-  width: 3.5rem;
-  height: 3.5rem;
+.container .Tasks .notHaveTasksText {
+  margin-top: 1rem;
+  line-height: 1.6rem;
+  text-align: center;
 }
