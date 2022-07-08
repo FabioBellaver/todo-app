@@ -1,19 +1,16 @@
 import { Trash } from "phosphor-react";
 import styles from "./TaskItem.module.css";
 
-interface TaskItemProps {
-  taskId: string;
-  taskContent: string;
-}
 
-export function TaskItem({taskId, taskContent}: TaskItemProps) {
+export function TaskItem() {
+
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
         <div className={styles.checkbox}>
-          <input type="checkbox" id={taskId} />
-          <label htmlFor={taskId}>
-            {taskContent}
+          <input type="checkbox" id="1"/>
+          <label htmlFor="1">
+            "nlblblb"
           </label>
         </div>
         <button>
