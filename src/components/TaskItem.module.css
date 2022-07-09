@@ -23,7 +23,7 @@
   display: none;
 }
 
-.wrapper .checkbox label {
+.wrapper .checkbox .incompleteTask {
   display: flex;
   align-items: center;
   color: var(--gray-100);
@@ -31,10 +31,14 @@
   cursor: pointer;
 }
 
-/* .wrapper .checkbox label {
+.wrapper .checkbox .completdTask {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  cursor: pointer;
   color: var(--gray-300);
   text-decoration: line-through;
-} */
+}
 
 .wrapper .checkbox input + label:before {
   content: '';

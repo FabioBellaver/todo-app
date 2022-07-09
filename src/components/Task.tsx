@@ -1,23 +1,39 @@
-import styles from "./Task.module.css";
-import clipboard from "../assets/clipboard.svg";
 import { useState } from "react";
 import { TaskItem } from "./TaskItem";
+import { TasksProps } from "../App";
 
-export function Tasks() {
-  const [notHaveTasks, setNotHaveTasks] = useState(false);
+import styles from "./Task.module.css";
+import clipboard from "../assets/clipboard.svg";
+
+interface TasksPropsFromParent {
+  tasks: TasksProps[];
+  onComplete: (id: string) => void;
+  onRemove: (id: string) => void;
+}
+
+export function Tasks({ tasks, onComplete, onRemove }: TasksPropsFromParent) {
+  const notHaveTasks = tasks.length === 0;
+  const tasksQuantity = tasks.length;
+  const completedTasksQuantity = tasks.filter(
+    (task) => task.isCompleted
+  ).length;
 
   return (
     <>
       <main className={styles.container}>
         <div className={styles.data}>
           <span className={styles.created}>
-            Created tasks <span className={styles.quantityCreated}>0</span>
+            Created tasks{" "}
+            <span className={styles.quantityCreated}>{tasksQuantity}</span>
           </span>
           <span className={styles.completed}>
-            Completed <span className={styles.quantityCompleted}>0</span>
+            Completed{" "}
+            <span className={styles.quantityCompleted}>
+              {completedTasksQuantity} of {tasksQuantity}
+            </span>
           </span>
         </div>
-        {notHaveTasks && (
+        {notHaveTasks ? (
           <div className={styles.Tasks}>
             <div className={styles.notHaveTasksText}>
               <img src={clipboard} alt="Clipboard icon" />
@@ -25,10 +41,18 @@ export function Tasks() {
               <p>Create tasks and organize your to-do items</p>
             </div>
           </div>
+        ) : (
+          <div>
+            {tasks.map((task) => (
+              <TaskItem
+                key={task.id}
+                task={task}
+                onComplete={onComplete}
+                onRemove={onRemove}
+              />
+            ))}
+          </div>
         )}
-        <div className={styles.createdTasks}>
-          <TaskItem />
-        </div>
       </main>
     </>
   );
