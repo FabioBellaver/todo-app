@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import { Header } from "./components/Header";
@@ -6,6 +6,10 @@ import { NewTask } from "./components/NewTask";
 import { Tasks } from "./components/Task";
 
 import "./global.css";
+
+// ----------------------------------------------------------------
+
+const LOCAL_STORAGE_KEY = "todoCreatedTasks";
 
 export interface TasksProps {
   id: string;
@@ -15,10 +19,25 @@ export interface TasksProps {
 
 function App() {
   const [tasks, setTasks] = useState<TasksProps[]>([]);
-  console.log(tasks);
+
+  const loadTasks = () => {
+    const savedTasks = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (savedTasks) {
+      setTasks(JSON.parse(savedTasks));
+    }
+  };
+
+  useEffect(() => {
+    loadTasks();
+  }, []);
+
+  const saveCreatedTasks = (savedTasks: TasksProps[]) => {
+    setTasks(savedTasks);
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedTasks));
+  };
 
   const addNewTask = (title: string) => {
-    setTasks([
+    saveCreatedTasks([
       ...tasks,
       {
         id: uuidv4(),
@@ -38,13 +57,12 @@ function App() {
       }
       return task;
     });
-    setTasks(tasksWithoutCompletedOnes);
+    saveCreatedTasks(tasksWithoutCompletedOnes);
   };
 
   const removeTask = (id: string) => {
     const tasksWithoutRemovedOnes = tasks.filter((task) => task.id !== id);
-
-    setTasks(tasksWithoutRemovedOnes);
+    saveCreatedTasks(tasksWithoutRemovedOnes);
   };
 
   return (
